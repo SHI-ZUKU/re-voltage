@@ -2,10 +2,10 @@
 Streamlitで大阪市内の不動産価格上昇率と市場ムードを可視化。
 
 ## セットアップ
-'pip install -r requirement.txt'
+'pip install -r requirements.txt'
 
 ## StreamlitによるWebアプリのRun(bashターミナル)
-'streamlit run app.py'
+'streamlit run streamlit_app.py'
 
 # ディレクトリ構成
 データは'data/raw/'に格納

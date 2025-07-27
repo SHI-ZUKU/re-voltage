@@ -12,7 +12,7 @@ import re
 
 nltk.download('punkt', quiet = True)
 
-st.set_page_config(page_title = "大阪市　物件過熱度ダッシュボード", layout = "wide")
+st.set_page_config(page_title = "大阪市 物件過熱度ダッシュボード", layout = "wide")
 
 #不動産データ
 try:
@@ -51,9 +51,9 @@ price_trend_pivot = df_station_near.groupby(['area', 'year'])['price'].mean().un
 
 #エリアごとの価格上昇率を計算
 try:
-    price_trend_pivot['growth_rate'] = ((price_trend_pivot[2024] - price_trend_pivot[2020]) / price_trend_pivot[2020]) * 100
+    price_trend_pivot['growth_rate'] = ((price_trend_pivot[2024] - price_trend_pivot[2010]) / price_trend_pivot[2010]) * 100
 except KeyError as e:
-    st.error(f"データに2020年または2024年がありません。: {e}")
+    st.error(f"データに2010年または2024年がありません。: {e}")
     st.write("利用可能な年：", price_trend_pivot.columns.tolist())
     price_trend_pivot['growth_rate'] = 0 #エラー回避
  
@@ -92,7 +92,7 @@ st.pyplot(fig)
 threshold = st.slider("過熱エリアの閾値(価格上昇率%)", 0, 100, 30)
 
 #ヒートマップ
-st.subheader("エリアごとの価格上昇率ヒートマップ(2020-2024)")
+st.subheader("エリアごとの価格上昇率ヒートマップ(2010-2024)")
 fig, ax = plt.subplots(figsize = (8, 16))
 heatmap_data = overheat_score.pivot_table(index = 'area', values = 'growth_rate')
 sns.heatmap(heatmap_data, annot = True, cmap = 'coolwarm', fmt = '.1f', ax = ax)
